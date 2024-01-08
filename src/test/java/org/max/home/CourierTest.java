@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.Optional;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//у Вас во всех тестах не правильное имя таблицу, при сипользование обычного SQL, тыблица называется courier_info
 public class CourierInfoEntity extends AbstractTest{
 
     @Test
@@ -31,6 +32,7 @@ public class CourierInfoEntity extends AbstractTest{
         }
         final Query query = getSession().createSQLQuery("SELECT * FROM courier").addEntity(CourierInfoEntity.class);
         //then
+        //countTableSize = 1, а не 8, т.к. запрос "SELECT * FROM courierInfo WHERE first_name='Bob'" вернёт только 1 значение
         Assertions.assertEquals(8, countTableSize);
         Assertions.assertEquals(15, query.list().size());
     }
@@ -46,6 +48,7 @@ public class CourierInfoEntity extends AbstractTest{
         //when
         ResultSet rs = stmt.executeQuery(sql);
         while (rs.next()) {
+            //тут получаете first_name, а затем сравниваете его с lastName, такое сравнение не будет проходить
             nameString = rs.getString(2);
         }
         //then
@@ -73,6 +76,7 @@ public class CourierInfoEntity extends AbstractTest{
         CourierInfoEntity creditEntity = (CustomersEntity) query.uniqueResult();
         //then
         Assertions.assertNotNull(creditEntity);
+        //почему delivery_type сравниваете с 10 ?
         Assertions.assertEquals("10", creditEntity.getDeliveryType());
     }
 
