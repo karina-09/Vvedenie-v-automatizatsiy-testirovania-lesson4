@@ -14,6 +14,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <junit.version>5.7.2</junit.version>
         <sql.version>3.42.0.0</sql.version>
+        //версия hibernate должна быть 5.4.0.Final или более
         <hibernate-version>5.0.1.Final</hibernate-version>
         <flyway.version>8.5.13</flyway.version>
         <surefire.version>2.22.2</surefire.version>
